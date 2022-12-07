@@ -20,7 +20,10 @@
 #include <memory>
 
 
+
 //zmiana
+//zmiana2
+
 std::unique_ptr<int> ptr = std::unique_ptr<int>(new int());
 
 
