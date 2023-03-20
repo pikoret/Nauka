@@ -111,15 +111,7 @@ class Dupa
 int main()
 {
     int a;
-    Dziedziczaca obiekt;
-    Otaczjaca obiektO;
-    obiekt.wyswietl();
-  //  obiekt.pub=3;
-    obiektO.pub=2;
-   // cout<<obiekt.prot<<endl;
-   Otaczjaca::Wewnetrzna objaaa;
-   Child obiektCh;
-   obiektCh.fun();
+
     cout << "Foo";
   cin>>a;
  return 0;

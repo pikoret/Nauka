@@ -2,125 +2,121 @@
 
 using namespace std;
 
-//Diamond problem
-class Person
-{
-public:
-  Person()
-  {
-    cout<<"Person"<<endl;
-  }
-  
-  int a;
-  virtual void fun()
-  {
-    cout<<"fun\n";
-  }
-  ~Person()
-  {
-    cout<<"~Person"<<endl;
-  }
-};
+// std::list implementacja własna
+// https://en.cppreference.com/w/cpp/container/list
+// push_back
+// push_front
+// insert wstawianie w środku
+// reverse
 
-class Father:  public Person
-{
-public:
-  Father()
+// https://www.geeksforgeeks.org/containers-cpp-stl/ lista, vector, map, array
+
+struct Pracownik{
+  static int numer;
+  int Id;
+  std::string imie;
+  std::string nazwisko;
+  std::string adres;
+  Pracownik *next;
+  Pracownik *prev;
+  Pracownik()
   {
-    cout<<"Father"<<endl;
+    cout<<"konstruktor Pracownik"<<endl;
   }
-  ~Father()
+  int Cunter()
   {
-    cout<<"~Father"<<endl;
+    return numer++;
   }
 
 };
 
-class Mother:  public Person
+class Lista
 {
-  public:
-  Mother()
+  Pracownik *head;
+  Pracownik *tail;
+  class Element
   {
-    cout<<"Mother"<<endl;
-  }
-  ~Mother()
-  {
-    cout<<"~Mother"<<endl;
+    public:
+    Element(Pracownik &p):data(p)
+    { 
+    }
+    Pracownik data;
 
-  }
-};
-
-class Child: virtual public Mother, virtual public Father
-{
-  public:
-  Child()
-  {
-    cout<<"Child"<<endl;
-  }
-  ~Child()
-  {
-    cout<<"~Child"<<endl;
-  }
-};
-
-class Otaczjaca
-{
-public:
-
-  class Wewnetrzna
-  {
 
   };
+  public:
+  Lista():head(NULL)
+  {
+    cout<<"konstruktor Lista"<<endl;
+  }
+  void dodajPracownika(string imie,string nazwisko, string adres);
+  void wyswietlListe();
+  void usunPracownika(int numerPracownika);
 
-int pub=1;
-string NapisPublic = "Public";
-
-private:
-int priv = 2;
-string NapisPrivate = "Pivate";
-
-protected:
-int prot = 3;
-string NapisProtected = "Protected";
-
-
-
+  
 
 };
 
-class Dziedziczaca:protected Otaczjaca
-{
-   
-    public:
-    void wyswietl()
+ void Lista::dodajPracownika( string imie,string nazwisko, string adres)
+ {
+    Pracownik *nowy = new Pracownik;
+    nowy->Id = nowy->Cunter();
+    (*nowy).imie = imie;
+    nowy->nazwisko = nazwisko;
+    nowy->adres = adres;
+    if(head == NULL)
     {
-        cout<<NapisPublic<<endl;
-        cout<<NapisProtected<<endl;
-      //  cout<<NapisPrivate<<endl;
+      head=nowy;
+    }
+    else
+    {
+      Pracownik * temp = head;
+      while(temp->next!=NULL)
+      {
+        temp = temp->next;
+      }
+      temp->next = nowy; 
     }
     
-    int temp =2;
-};
+    
 
-class Dupa
+}
+void Lista::wyswietlListe()
+{
+  Pracownik *temp = head;
+  if(head == NULL)
+  {
+    cout<<"Pusto";
+  }
+  else
+  {
+    while(temp != NULL)
+    {
+      cout<<temp->Id<<" "<<temp->imie<<" "<<temp->nazwisko<<" "<<temp->adres<<endl;
+      temp = temp->next;
+    }
+  }
+}
+int Pracownik::numer = 1;
+void Lista::usunPracownika(int numerPracownika)
 {
 
-
-};
+}
 
 int main()
 {
-    int a;
-    Dziedziczaca obiekt;
-    Otaczjaca obiektO;
-    obiekt.wyswietl();
-  //  obiekt.pub=3;
-    obiektO.pub=2;
-   // cout<<obiekt.prot<<endl;
-   Otaczjaca::Wewnetrzna objaaa;
-   Child obiektCh;
-   obiektCh.fun();
-    cout << "Foo";
+  int a;
+  Lista Obiekt;
+  Lista Obiekt2;
+  Obiekt.dodajPracownika("Piotr","Kowalski","Dabrawskiego");
+  Obiekt.dodajPracownika("Tomasz","Malinowski","Dabrawskiego");
+  Obiekt.dodajPracownika("Alan","Man","Dabrawskiego");
+  Obiekt.dodajPracownika("Adam","Dry","Dabrawskiego");
+  Obiekt.wyswietlListe();
   cin>>a;
+  Obiekt.dodajPracownika("Adam","Dry","Dabrawskiego");
+  Obiekt.wyswietlListe();
+  
+
  return 0;
 }
